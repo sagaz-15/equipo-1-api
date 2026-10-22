@@ -43,7 +43,27 @@ Alguien diseñó estas direcciones. Escribe qué está mal en cada una y cómo l
 | `POST /evaluacion/3/calificar` (responde `200 { "ok": false, "error": "..." }` si la nota es inválida) | | |
 | `GET /v1/Evaluaciones/` | | |
 | `PUT /evaluaciones` con **toda** la lista de evaluaciones en el cuerpo, cada vez que algo cambia | | |
+###  Las seis operaciones
 
+| Operación | Método | URI | Éxito | Errores posibles |
+|---|---|---|---|---|
+| Listar evaluaciones | GET | `/v1/evaluaciones` | 200 con la lista (puede venir vacía) | Ninguno de negocio |
+| Obtener una evaluación | GET | `/v1/evaluaciones/{id}` | 200 con la evaluación | 404: el id no existe |
+| Agregar una evaluación | POST | `/v1/evaluaciones` | 201 con la evaluación creada y su dirección en `Location` | 422: nombre vacío o de más de 40 caracteres, peso fuera de 1-100, nota fuera de 0-5, o pesos que suman más de 100. 409: ya existe una con ese nombre |
+| Calificar una evaluación | PATCH | `/v1/evaluaciones/{id}` (cuerpo: `{ "nota": 4.5 }`) | 200 con la evaluación actualizada | 404: el id no existe. 422: nota fuera de 0-5 |
+| Eliminar una evaluación | DELETE | `/v1/evaluaciones/{id}` | 204 sin cuerpo | 404: el id no existe |
+| Ver el resumen | GET | `/v1/resumen` | 200 con el resumen calculado | Ninguno de negocio |
+
+###  Critica estas direcciones
+
+| Diseño original | Qué está mal | Cómo la reescribo |
+|---|---|---|
+| `POST /crearEvaluacion` | Rompe la regla 1 (el verbo "crear" está en la URI, y el método ya es la acción), la 2 (singular) y la 3 (camelCase) | `POST /v1/evaluaciones` |
+| `GET /getAllEvaluaciones?format=json` | Rompe la regla 1 (`getAll` repite el GET), la 3 (camelCase) y la 4 (sin versión). El formato no es un filtro, se pide con la cabecera `Accept` | `GET /v1/evaluaciones` |
+| `GET /eliminar?id=3` | Rompe la regla 1 (verbo en la URI) y la 2 (el id va en la ruta). Además un GET debe ser seguro y este borra: un navegador o un rastreador podría eliminar datos solo por visitar el enlace | `DELETE /v1/evaluaciones/3` |
+| `POST /evaluacion/3/calificar` (responde `200 { "ok": false, ... }`) | Rompe la regla 1 (verbo "calificar"), la 2 (singular), la 6 (el fallo se dice con un campo `ok` y un 200 en vez del estado HTTP) y la 7 (error sin formato estándar) | `PATCH /v1/evaluaciones/3` con `{ "nota": 4.5 }`. Éxito 200; nota inválida 422 y id inexistente 404, ambos con `application/problem+json` |
+| `GET /v1/Evaluaciones/` | Rompe la regla 3 (mayúscula y barra final) | `GET /v1/evaluaciones` |
+| `PUT /evaluaciones` con toda la lista en el cuerpo | Rompe la regla 2 (cada elemento debe colgar de su colección con su propia URI) y la 4 (sin versión). PUT reemplaza un recurso completo, y acá se reenvía y se reemplaza la colección entera por cada cambio | `POST /v1/evaluaciones` para crear, `PATCH /v1/evaluaciones/{id}` para cambiar y `DELETE /v1/evaluaciones/{id}` para borrar |
 ## 2. Mis decisiones de estado (Parte 2)
 
 Después de completar `ESTADO_POR_CODIGO`, responde con tus palabras.
