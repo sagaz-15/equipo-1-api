@@ -23,6 +23,13 @@ minúsculas, con versión `/v1`) y el **método** es la acción. No pongas verbo
 | Poner o quitar la nota de una evaluación | | | | |
 | Eliminar una evaluación | | | | |
 | Ver el resumen (acumulado, nota necesaria, estado) | | | | |
+Método del Modelo	¿Cambia el estado?	Recurso	Verbo	Ruta	Éxito
+evaluaciones (lista)	No	La colección de evaluaciones	GET	/evaluaciones	200
+obtener(id)	No	Una evaluación	GET	/evaluaciones/:id	200
+agregar({ nombre, peso, nota })	Sí: crea	La colección (el servidor decide el id)	POST	/evaluaciones	201
+calificar(id, nota)	Sí: modifica solo la nota	Una evaluación	PATCH	/evaluaciones/:id	200
+eliminar(id)	Sí: borra	Una evaluación	DELETE	/evaluaciones/:id	204
+resumen()	No: se calcula	El resumen (recurso que no es una fila de datos)	GET	/resumen	200
 
 ### 1b. Critica estas direcciones
 
