@@ -112,6 +112,7 @@ los clientes existentes, y justifica en una frase.
 
 **Plan de retiro de la v1.** Fechas que usaron en `Deprecation` y `Sunset`: ______________________.
 ¿Cómo se enteraría un cliente real que nunca lee tu documentación? ¿Qué pondrías en tu plan para ayudarlos a migrar?
+R/ Un cliente que nunca lee la documentación porque se da cuenta por las cabeceras. Cada respuesta de GET /v1/evaluaciones trae Deprecation y Sunset, y una cabecera Link con rel="successor-version" que apunta a /v2/evaluaciones. Además nuestro cliente-api.js escribe una advertencia en la consola con la fecha de retiro y la ruta nueva. Para ayudarlos a migrar dejamos la v1 funcionando hasta el Sunset y publicamos una guía corta que explique que la lista ahora es un objeto con datos y paginacion y cómo pedir cada página. Después de esa fecha respondemos con un error claro, por ejemplo 410, que diga a dónde ir. Solo la lista de la v1 está obsoleta y el resto de sus endpoints sigue igual.
 
 ## 5. Evidencias (Partes 2 a 5)
 
