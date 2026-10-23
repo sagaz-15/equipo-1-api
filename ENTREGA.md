@@ -102,7 +102,7 @@ los clientes existentes, y justifica en una frase.
 | Cambio | ¿Compatible o rompe? | ¿Por qué? |
 |---|---|---|
 | Agregar el campo `aporte` a cada evaluación | Compatible | Es un campo nuevo y los clientes viejos lo ignoran, así que siguen leyendo lo mismo de antes. |
-| Cambiar `peso` por `porcentaje` en cada evaluación | Rompe | Los clientes buscan `peso` y ya no existe, entonces les llega vacío. |
+| Cambiar `peso` por `porcentaje` en cada evaluación | Rompe | Los clientes buscan peso y ya no existe, entonces les llega vacío. |
 | Devolver `nota` como texto ("4.2") en vez de número | Rompe | Cambia el tipo del dato y un cliente que hace cuentas con la nota falla o junta texto. |
 | Agregar el endpoint `GET /v1/evaluaciones/{id}/historial` | Compatible | Es una ruta nueva y las que ya existían no cambian. |
 | Pasar la lista de un arreglo a un objeto `{ datos, paginacion }` | Rompe | El cliente espera un arreglo y recibe un objeto, así que su código para recorrer la lista falla. |
