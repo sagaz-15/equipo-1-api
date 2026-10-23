@@ -101,14 +101,14 @@ los clientes existentes, y justifica en una frase.
 
 | Cambio | ¿Compatible o rompe? | ¿Por qué? |
 |---|---|---|
-| Agregar el campo `aporte` a cada evaluación | | |
-| Cambiar `peso` por `porcentaje` en cada evaluación | | |
-| Devolver `nota` como texto (`"4.2"`) en vez de número | | |
-| Agregar el endpoint `GET /v1/evaluaciones/{id}/historial` | | |
-| Pasar la lista de un arreglo a un objeto `{ datos, paginacion }` | | |
-| Exigir un campo nuevo, `profesor`, al crear una evaluación | | |
-| Cambiar el `porPagina` por defecto de 10 a 20 | | |
-| Aceptar también `peso` con decimales de coma (`"12,5"`) | | |
+| Agregar el campo `aporte` a cada evaluación | Compatible | Es un campo nuevo y los clientes viejos lo ignoran, así que siguen leyendo lo mismo de antes. |
+| Cambiar `peso` por `porcentaje` en cada evaluación | Rompe | Los clientes buscan `peso` y ya no existe, entonces les llega vacío. |
+| Devolver `nota` como texto ("4.2") en vez de número | Rompe | Cambia el tipo del dato y un cliente que hace cuentas con la nota falla o junta texto. |
+| Agregar el endpoint `GET /v1/evaluaciones/{id}/historial` | Compatible | Es una ruta nueva y las que ya existían no cambian. |
+| Pasar la lista de un arreglo a un objeto `{ datos, paginacion }` | Rompe | El cliente espera un arreglo y recibe un objeto, así que su código para recorrer la lista falla. |
+| Exigir un campo nuevo, `profesor`, al crear una evaluación | Rompe | Los clientes viejos no lo mandan y el servidor les rechaza la petición. Si fuera opcional sí sería compatible. |
+| Cambiar el `porPagina` por defecto de 10 a 20 | Rompe | La forma de la respuesta es igual, pero un cliente que contaba con 10 por página recibe otra cantidad y se le descuadran las páginas. |
+| Aceptar también `peso` con decimales de coma ("12,5") | Compatible | Solo aceptamos más formatos de entrada y lo que los clientes viejos mandaban sigue funcionando. |
 
 **Plan de retiro de la v1.** Fechas que usaron en `Deprecation` y `Sunset`: ______________________.
 ¿Cómo se enteraría un cliente real que nunca lee tu documentación? ¿Qué pondrías en tu plan para ayudarlos a migrar?
