@@ -128,7 +128,65 @@ _
 **Fragmento de `/openapi.json`** con la operación `GET /v2/evaluaciones`:
 
 ```json
-
+{
+  "/v2/evaluaciones": {
+    "get": {
+      "operationId": "listarEvaluaciones_v2",
+      "tags": ["v2"],
+      "summary": "Lista las evaluaciones con paginación, filtro y orden",
+      "parameters": [
+        {
+          "name": "pagina",
+          "in": "query",
+          "description": "Número de página, empezando en 1.",
+          "schema": { "type": "integer", "minimum": 1, "default": 1 }
+        },
+        {
+          "name": "porPagina",
+          "in": "query",
+          "description": "Cuántas evaluaciones trae cada página.",
+          "schema": { "type": "integer", "minimum": 1, "maximum": 50, "default": 10 }
+        },
+        {
+          "name": "estado",
+          "in": "query",
+          "description": "Filtra por tener nota o no.",
+          "schema": { "type": "string", "enum": ["pendiente", "calificada"] }
+        },
+        {
+          "name": "orden",
+          "in": "query",
+          "description": "Campo para ordenar. Un guion delante invierte el orden.",
+          "schema": { "type": "string", "enum": ["id", "nombre", "-nombre", "peso", "-peso"], "default": "id" }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Una página de evaluaciones con su paginación.",
+          "headers": {
+            "Link": {
+              "description": "Enlaces rel=\"prev\" y rel=\"next\" a las páginas vecinas (RFC 8288). No aparece si todo cabe en una sola página.",
+              "schema": { "type": "string" }
+            }
+          },
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PaginaDeEvaluaciones" }
+            }
+          }
+        },
+        "400": {
+          "description": "Algún parámetro de consulta no es válido: pagina, porPagina, estado u orden.",
+          "content": {
+            "application/problem+json": {
+              "schema": { "$ref": "#/components/schemas/Problema" }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
 ## 6. Reflexión
