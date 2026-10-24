@@ -122,7 +122,8 @@ R/ Un cliente que nunca lee la documentación porque se da cuenta por las cabece
 
 ```
 
-**Captura de pantalla** de la pestaña *Network* del navegador mostrando las cabeceras `Deprecation` y `Sunset` de `GET /v1/evaluaciones`: _(pega la imagen o su enlace)_
+**Captura de pantalla** de la pestaña *Network* del navegador mostrando las cabeceras `Deprecation` y `Sunset` de `GET /v1/evaluaciones`: _<img width="1901" height="1021" alt="image" src="https://github.com/user-attachments/assets/67f44418-fa24-42c2-990c-01406e5f6cce" />
+_
 
 **Fragmento de `/openapi.json`** con la operación `GET /v2/evaluaciones`:
 
