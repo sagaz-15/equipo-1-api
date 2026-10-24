@@ -119,8 +119,40 @@ R/ Un cliente que nunca lee la documentación porque se da cuenta por las cabece
 **Salida de `npm test`** (pega el final, donde dice cuántas pruebas pasan):
 
 ```text
-✗ 105 de 110 pruebas pasan.
+> api-notas-lab@1.0.0 test
+> node pruebas/ejecutar.mjs
 
+
+EL MODELO (viene terminado)
+  ✓ Reglas con código estable ........................... 2/2
+  ✓ Lo que la API necesita del Modelo ................... 5/5
+
+PARTE 2 · LA API v1
+  ✓ 2A · Leer (GET) ..................................... 7/7
+  ✓ 2B · Crear (POST) ................................... 8/8
+  ✓ 2C · Modificar y borrar (PATCH, DELETE) ............. 9/9
+  ✓ 2D · Errores que se pueden leer ..................... 4/4
+
+PARTE 3 · EL CLIENTE MVC
+  ✓ 3A · El Modelo remoto habla con la API .............. 14/14
+  ✓ 3B · El Controlador espera al Modelo ................ 5/5
+
+PARTE 4 · VERSIONADO
+  ✓ 4A · v2: lista con paginación, filtro y orden ....... 7/7
+  ✓ 4B · v1 sigue igual… y avisa que se retira .......... 6/6
+  ✓ 4C · v2 completa .................................... 4/4
+
+PARTE 5 · DOCUMENTACIÓN
+  ✓ 5A · El documento ................................... 4/4
+  ✓ 5B · La documentación no miente ..................... 7/7
+
+ARQUITECTURA
+  ✓ El Modelo no sabe de HTTP ........................... 3/3
+  ✓ Las rutas son el Controlador de la API .............. 5/5
+  ✓ Las URI nombran recursos ............................ 4/4
+  ✓ La Vista y el Controlador del navegador respetan las capas .. 5/5
+  ✓ Solo un archivo habla HTTP, y el navegador no tiene reglas .. 4/4
+  ✓ Sin pendientes ...................................... 1/1
 ```
 
 **Captura de pantalla** de la pestaña *Network* del navegador mostrando las cabeceras `Deprecation` y `Sunset` de `GET /v1/evaluaciones`: _<img width="1901" height="1021" alt="image" src="https://github.com/user-attachments/assets/67f44418-fa24-42c2-990c-01406e5f6cce" />
