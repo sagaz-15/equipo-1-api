@@ -93,10 +93,15 @@ export function crearRutas(modelo) {
   // -------------------------------------------------------------
   // 2A · Leer evaluaciones
 
-  const listarV1 = () => ({
-    status: 200,
-    cuerpo: modelo.evaluaciones.map(representarEvaluacion),
-  });
+const listarV1 = () => ({
+  status: 200,
+  cabeceras: {
+    Deprecation: `@${Math.floor(DEPRECIADA_DESDE.getTime() / 1000)}`,
+    Sunset: SE_RETIRA_EN.toUTCString(),
+    Link: '</v2/evaluaciones>; rel="successor-version"',
+  },
+  cuerpo: modelo.evaluaciones.map(representarEvaluacion),
+});
 
   const obtener = (solicitud) => ({
     status: 200,
@@ -275,36 +280,15 @@ export function crearRutas(modelo) {
   // Parte 2: rutas de la API v1.
   // La lista de la v2 y el versionado se completan en la Parte 4.
 
-  return [
-    {
-      metodo: 'GET',
-      ruta: '/v1/evaluaciones',
-      manejador: listarV1,
-    },
-    {
-      metodo: 'GET',
-      ruta: '/v1/evaluaciones/{id}',
-      manejador: obtener,
-    },
-    {
-      metodo: 'GET',
-      ruta: '/v1/resumen',
-      manejador: resumen,
-    },
-    {
-      metodo: 'POST',
-      ruta: '/v1/evaluaciones',
-      manejador: crear,
-    },
-    {
-      metodo: 'PATCH',
-      ruta: '/v1/evaluaciones/{id}',
-      manejador: calificar,
-    },
-    {
-      metodo: 'DELETE',
-      ruta: '/v1/evaluaciones/{id}',
-      manejador: eliminar,
-    },
-  ];
+return [
+  ...paraVersiones(['v1', 'v2'], [
+    { metodo: 'GET', ruta: '/evaluaciones/{id}', manejador: obtener },
+    { metodo: 'GET', ruta: '/resumen', manejador: resumen },
+    { metodo: 'POST', ruta: '/evaluaciones', manejador: crear },
+    { metodo: 'PATCH', ruta: '/evaluaciones/{id}', manejador: calificar },
+    { metodo: 'DELETE', ruta: '/evaluaciones/{id}', manejador: eliminar },
+  ]),
+  { metodo: 'GET', ruta: '/v1/evaluaciones', manejador: listarV1 },
+  { metodo: 'GET', ruta: '/v2/evaluaciones', manejador: listarV2 },
+];
 }
