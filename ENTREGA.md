@@ -153,10 +153,14 @@ ARQUITECTURA
   ✓ La Vista y el Controlador del navegador respetan las capas .. 5/5
   ✓ Solo un archivo habla HTTP, y el navegador no tiene reglas .. 4/4
   ✓ Sin pendientes ...................................... 1/1
+  RETO OPCIONAL · CONCURRENCIA
+  ◐ Reto · Que nadie pise el trabajo de otro ............ 1/6
+
+105 de 110 pruebas pasan.
 ```
 
-**Captura de pantalla** de la pestaña *Network* del navegador mostrando las cabeceras `Deprecation` y `Sunset` de `GET /v1/evaluaciones`: _<img width="1901" height="1021" alt="image" src="https://github.com/user-attachments/assets/67f44418-fa24-42c2-990c-01406e5f6cce" />
-_
+**Captura de pantalla** de la pestaña *Network* del navegador mostrando las cabeceras `Deprecation` y `Sunset` de `GET /v1/evaluaciones`: <img width="1901" height="1021" alt="image" src="https://github.com/user-attachments/assets/67f44418-fa24-42c2-990c-01406e5f6cce" />
+
 
 **Fragmento de `/openapi.json`** con la operación `GET /v2/evaluaciones`:
 
