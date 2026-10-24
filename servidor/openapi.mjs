@@ -216,9 +216,8 @@ export function documento() {
     const definiciones = paraVersiones([version], comunes(version));
     for (const { ruta, metodo, operacion } of definiciones) agregar(ruta, metodo, operacion);
   }
+  agregar('/v1/evaluaciones', 'get', listarV1);
   agregar('/v2/evaluaciones', 'get', listarV2);
-  // TODO 5B: cuando termines listarV2, activa esta línea:
-  // agregar('/v2/evaluaciones', 'get', listarV2);
 
   return {
     openapi: '3.1.0',
