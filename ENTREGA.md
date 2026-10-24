@@ -119,6 +119,7 @@ R/ Un cliente que nunca lee la documentación porque se da cuenta por las cabece
 **Salida de `npm test`** (pega el final, donde dice cuántas pruebas pasan):
 
 ```text
+✗ 105 de 110 pruebas pasan.
 
 ```
 
